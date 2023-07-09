@@ -1,20 +1,19 @@
 "use strict"
+import db from "./database/db";
+
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
-import pool from "./database/index";
 
-pool.query('SELECT * FROM product', (err: any, res: any) => {
-    if (err) {
-        console.log(err);
-        // res.status(500).json({message: 'error'})
-    } else {
-        console.log(res.rows);
+db.select('*').from('product').then((data: any) => {
+    console.log(data);
+}).catch((err: any) => console.log(err));
+
+db.raw('SELECT * FROM product').then((data: any) => {
+        console.log('*********', data.rows);
     }
-});
+).catch((err: any) => console.log(err));
 
-
-console.log('************8', pool);
 
 app.use(express.json());
 

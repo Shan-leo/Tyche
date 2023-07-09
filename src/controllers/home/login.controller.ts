@@ -1,5 +1,5 @@
 import {errResponse} from "../../helpers/controller.helper";
-import pool from "../../database";
+import pool from "../../database/knexfile";
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
