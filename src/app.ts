@@ -1,18 +1,13 @@
 "use strict"
 import db from "./database/db";
 
+require('dotenv').config();
+
+
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-db.select('*').from('product').then((data: any) => {
-    console.log(data);
-}).catch((err: any) => console.log(err));
-
-db.raw('SELECT * FROM product').then((data: any) => {
-        console.log('*********', data.rows);
-    }
-).catch((err: any) => console.log(err));
+const PORT = process.env.PORT;
+const Router = express.Router();
 
 
 app.use(express.json());
@@ -23,19 +18,20 @@ app.use(
     })
 );
 
+// const data = db.raw('SELECT * FROM product').then((data: any) => {
+//     console.log('*********', data.rows);
+//
+// }).catch((err: any) => console.log(err));
 
-app.get("/", (req: any, res: any) => {
-    res.status(200).json({message: "Hello World!"});
-});
 
-app.post("/", (req: any, res: any) => {
-
-        res.status(200).json({message: `success`});
-    }
-);
+app.use(`/`, require('./routes/home.routes'))
+app.use(`/admin`, require('./routes/admin.routes'))
+app.use(`/products`, require('./routes/products.routes'))
 
 
 app.listen(PORT, () => {
         console.log(`Listening on port ${PORT}`);
     }
 );
+
+export {Router};
