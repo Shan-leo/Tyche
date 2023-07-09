@@ -26,6 +26,7 @@ app.use(
 
 app.use(`/`, require('./routes/home.routes'))
 app.use(`/admin`, require('./routes/admin.routes'))
+app.use(`/products`, require('./routes/products.routes'))
 
 
 app.listen(PORT, () => {
