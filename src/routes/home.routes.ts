@@ -1,4 +1,11 @@
-const router = require('express').Router();
+const homeRouter = require('express').Router();
 
 const loginController = require('../controllers/home/login.controller');
-router.post('/login', loginController.login);
+homeRouter.post('/login', loginController.login);
+
+const registerController = require('../controllers/home/register.controller');
+homeRouter.post('/register/customer', registerController.customer);
+homeRouter.post('/register/admin', registerController.admin);
+
+
+module.exports = homeRouter
